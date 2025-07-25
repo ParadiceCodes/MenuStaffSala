@@ -52,7 +52,7 @@
 
     .product {
       margin: 15px auto;
-      background: #2a0b3b;
+      background: #2a0b3b; <!-- sfondo principale #2a0b3b-->
       border-radius: 15px;
       padding: 15px;
       max-width: 500px;
@@ -124,15 +124,11 @@
   </style>
 </head>
 <body>
-  <h1>Staff Sala</h1>
-
+  <h1>Sala</h1>
 
 
   <div>
-        <form align="center">
-        <textarea rows="14" cols="50"> note: </textarea>
-		</form> 
-		    <h2>Ordine Tavolo  <form align="center">
+		    <h2>Tavolo n*  <form align="center">
         <textarea rows="5" cols="50">       </textarea></form>  </h2>  
     <select id="categorySelect" onchange="showProducts()">
       <option value="">-- Seleziona --</option>
@@ -175,10 +171,9 @@
     </table>  <!-- CHIUSURA TABLE PRINCIPALE -->
 	<button onclick="clearOrder()">Svuota Ordine</button>
 	 <h3 id="totalPrice">Totale: 0.00</h3>
-	<p style="margin-top: 20px; font-size: 1.2rem; color: #f22440; font-weight: bold;">
-            -il pollo è finito <br>
-			-tiramisu Terminati <br>
-			-Cheese cake solo con Fragola 
+        <form align="center">
+          <textarea rows="14" cols="50"> note: </textarea>
+		</form> 
     </p>
 	
 
@@ -346,7 +341,7 @@ function clearOrder() {
   tbody.innerHTML = '';
   let total = 0;
 
-  // Raggruppa per categoria
+  <!-- Raggruppa per categoria -->
   const grouped = {};
   order.forEach(item => {
     if (!grouped[item.category]) {
@@ -355,11 +350,13 @@ function clearOrder() {
     grouped[item.category].push(item);
   });
 
-  // Ordina categorie in base a menuData.categories
+  //
+
+<!--  Ordina categorie in base a menuData.categories -->
   menuData.categories.forEach(category => {
     const items = grouped[category];
     if (items) {
-      // Intestazione categoria
+      <!-- Intestazione categoria -->
       const catRow = document.createElement('tr');
       catRow.innerHTML = `<td colspan="1" style="font-weight:bold; background-color:#3a104d; color:#ffe600;">${category}</td>`;
       tbody.appendChild(catRow);
