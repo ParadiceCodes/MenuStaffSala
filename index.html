@@ -132,12 +132,12 @@
   </style>
 </head>
 <body>
-  <h1>Sala</h1>
+  <h1>StaffSala</h1>
 
 
   <div> 
             <!-- FINESTRA PER INSERIRE IL TAVOLO -->
-		   <input type="text" id="table-number" placeholder="Numero Tavolo">  <br>
+		   <input type="text" id="table-number" placeholder="Inserisci Tavolo">  <br> <br>
            
 
 
@@ -258,12 +258,12 @@
 		
 		
 		<!-- CATEGORIA DOLCI -->
-        { name: "Tiramisu_(Classico o Pistacchio)", category: "Dolci", price: 5.00 },
-		{ name: "Cheese Cake_(Fragola,Frutti di Bosco,Nutella,Pistacchio)", category: "Dolci", price: 5.00 },
-		{ name: "Pancakes_(Sciroppo D'acero o Fragole)", category: "Dolci", price: 5.00 },
-		{ name: "Coppa Gelato_(Crema o Cioccolato)", category: "Dolci", price: 4.00 },
-		{ name: "Sweet Paradice_(Caramel Pecan Brownie)", category: "Dolci", price: 6.00 },
-		{ name: "Waffle_(Fragola,Frutti di Bosco,Nutella,Pistacchio) ", category: "Dolci", price: 5.00 },
+        { name: "Tiramisu", category: "Dolci", price: 5.00 },
+		{ name: "Cheese Cake", category: "Dolci", price: 5.00 },
+		{ name: "Pancakes", category: "Dolci", price: 5.00 },
+		{ name: "Coppa Gelato", category: "Dolci", price: 4.00 },
+		{ name: "Sweet Paradice", category: "Dolci", price: 6.00 },
+		{ name: "Waffle", category: "Dolci", price: 5.00 },
 		{ name: "Lotus Cake", category: "Dolci", price: 6.00 },
 		
 		<!-- CATEGORIA DRINKS -->
@@ -427,13 +427,13 @@ function downloadOrder() {
       items.forEach(item => {
         const subtotal = item.quantity * item.price;
         total += subtotal;
-        text += `${item.name} x${item.quantity} - €${subtotal.toFixed(2)}\n`;
+        text += `${item.name} x${item.quantity} - ${subtotal.toFixed(2)}\n`;
       });
       text += "\n";
     }
   });
-
-  text += `TOTALE: €${total.toFixed(2)}\n`;
+    text += "*************************** \n \n";
+  text += `TOTALE: ${total.toFixed(2)}\n`;
 
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement('a');
