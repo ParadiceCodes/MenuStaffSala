@@ -127,9 +127,12 @@
   <h1>Sala</h1>
 
 
-  <div>
-		    <h2>Tavolo n*  <form align="center">
-        <textarea rows="5" cols="50">       </textarea></form>  </h2>  
+  <div> 
+            <!-- FINESTRA PER INSERIRE IL TAVOLO -->
+		   <input type="text" id="table-number" placeholder="Numero Tavolo">  <br>
+           
+
+
     <select id="categorySelect" onchange="showProducts()">
       <option value="">-- Seleziona --</option>
 	  
@@ -170,9 +173,11 @@
       <tbody id="summaryList"></tbody>
     </table>  <!-- CHIUSURA TABLE PRINCIPALE -->
 	<button onclick="clearOrder()">Svuota Ordine</button>
+	<button onclick="downloadOrder()">Scarica Comanda</button>
+
 	 <h3 id="totalPrice">Totale: 0.00</h3>
         <form align="center">
-          <textarea rows="14" cols="50"> note: </textarea>
+		  <textarea rows= "14" cols="50 "id="note" placeholder="Note"></textarea>
 		</form> 
     </p>
 	
@@ -384,6 +389,54 @@ function clearOrder() {
 
     showProducts();
     updateSummary();
+	
+	<!-- PER SCARICARE LA COMANDA -->
+function downloadOrder() {
+  if (order.length === 0) {
+    alert("Nessun prodotto nell'ordine.");
+    return;
+  }
+
+  const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
+  const note = document.getElementById("note").value.trim() || "Nessuna nota";
+
+  let text = "=== COMANDA ===\n\n";
+  text += `Tavolo: ${tableNumber}\n`;
+  text += `Note: ${note}\n\n`;
+
+  let total = 0;
+  const grouped = {};
+  order.forEach(item => {
+    if (!grouped[item.category]) {
+      grouped[item.category] = [];
+    }
+    grouped[item.category].push(item);
+  });
+
+  menuData.categories.forEach(category => {
+    const items = grouped[category];
+    if (items) {
+      text += `-- ${category} --\n`;
+      items.forEach(item => {
+        const subtotal = item.quantity * item.price;
+        total += subtotal;
+        text += `${item.name} x${item.quantity} - €${subtotal.toFixed(2)}\n`;
+      });
+      text += "\n";
+    }
+  });
+
+  text += `TOTALE: €${total.toFixed(2)}\n`;
+
+  const blob = new Blob([text], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'comanda.txt';
+  link.click();
+}
+
+
+
   </script>
 </body>
 </html>
