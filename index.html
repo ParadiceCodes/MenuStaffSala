@@ -26,11 +26,11 @@
       z-index: 1000;
     }
 
-    select, button {
-      margin: 10px 5px;
-      padding: 10px;
+    select, button {  <!-- tasto aggiungi rosa -->
+      margin: 1px 5px;
+      padding: 5px;
       font-size: 1rem;
-      border-radius: 8px;
+      border-radius: 2px;
       border: none;
       outline: none;
     }
@@ -50,14 +50,22 @@
       background-color: #ff33dd; <!-- colre rosa sfondo aggiungi -->
     }
 
+      #productList {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+
     .product {
-      margin: 15px auto;
-      background: #2a0b3b; <!-- sfondo principale #2a0b3b-->
+      background: #2a0b3b; /* sfondo principale */
       border-radius: 15px;
       padding: 15px;
-      max-width: 500px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-	  animation: fadeIn 0.5s ease-in-out;
+      animation: fadeIn 0.5s ease-in-out;
+      text-align: center;
+      width: 100%;
+      max-width: 140px; /* più piccola per stare in 3 per riga */
     }
 	    @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
@@ -73,7 +81,7 @@
       margin-top: 40px;
     }
 
-    table {
+    table {    <!--TABELLA RIEPILOGO -->
       margin: 0 auto;
       width: 90%;
       border-collapse: collapse;
@@ -171,7 +179,7 @@
         </tr>
       </thead>
       <tbody id="summaryList"></tbody>
-    </table>  <!-- CHIUSURA TABLE PRINCIPALE -->
+    </table>  <!-- CHIUSURA TABLE PRINCIPALE --> <br>
 	<button onclick="clearOrder()">Svuota Ordine</button>
 	<button onclick="downloadOrder()">Scarica Comanda</button>
 
@@ -231,11 +239,11 @@
 		{ name: "Paradice Salad", category: "Insalate", price: 9.00 },
 		
 		<!-- CATEGORIA APERITIVI E TAGLIERI -->
-        { name: "Aperitivo Light <br> (Arachidi,Olive,Chips)", category: "Aperitivi & Taglieri", price: 4.00 },
-		{ name: "Classico <br> (Salumi,Formaggi,Crostini)", category: "Aperitivi & Taglieri", price: 7.00 },
-		{ name: "Green <br> (Verdure Grigliate,Hummus,Bruschetta)", category: "Aperitivi & Taglieri", price: 7.00, customColor: "#00FF00" },
-		{ name: "Messicano <br> (Nachos,Mix Tacos)", category: "Aperitivi & Taglieri", price: 10.00 },
-		{ name: "Paradice Plus x2 <br> (Salumi,Formaggi,Mix Fritti ", category: "Aperitivi & Taglieri", price: 18.00 },
+        { name: "Aperitivo Light_(Arachidi,Olive,Chips)", category: "Aperitivi & Taglieri", price: 4.00 },
+		{ name: "Classico_(Salumi,Formaggi,Crostini)", category: "Aperitivi & Taglieri", price: 7.00 },
+		{ name: "Green_(Verdure Grigliate,Hummus,Bruschetta)", category: "Aperitivi & Taglieri", price: 7.00, customColor: "#00FF00" },
+		{ name: "Messicano_(Nachos,Mix Tacos)", category: "Aperitivi & Taglieri", price: 10.00 },
+		{ name: "Paradice Plus x2_(Salumi,Formaggi,Mix Fritti ", category: "Aperitivi & Taglieri", price: 18.00 },
 		
 		<!-- CATEGORIA COMBO -->
         { name: "Classic Fried Paradice", category: "Paradice Combo", price: 10.00 },
@@ -250,12 +258,12 @@
 		
 		
 		<!-- CATEGORIA DOLCI -->
-        { name: "Tiramisu <br> (Classico o Pistacchio)", category: "Dolci", price: 5.00 },
-		{ name: "Cheese Cake <br> (Fragola,Frutti di Bosco,Nutella,Pistacchio)", category: "Dolci", price: 5.00 },
-		{ name: "Pancakes <br> (Sciroppo D'acero o Fragole)", category: "Dolci", price: 5.00 },
-		{ name: "Coppa Gelato <br> (Crema o Cioccolato)", category: "Dolci", price: 4.00 },
-		{ name: "Sweet Paradice <br> (Caramel Pecan Brownie)", category: "Dolci", price: 6.00 },
-		{ name: "Waffle <br> (Fragola,Frutti di Bosco,Nutella,Pistacchio) ", category: "Dolci", price: 5.00 },
+        { name: "Tiramisu_(Classico o Pistacchio)", category: "Dolci", price: 5.00 },
+		{ name: "Cheese Cake_(Fragola,Frutti di Bosco,Nutella,Pistacchio)", category: "Dolci", price: 5.00 },
+		{ name: "Pancakes_(Sciroppo D'acero o Fragole)", category: "Dolci", price: 5.00 },
+		{ name: "Coppa Gelato_(Crema o Cioccolato)", category: "Dolci", price: 4.00 },
+		{ name: "Sweet Paradice_(Caramel Pecan Brownie)", category: "Dolci", price: 6.00 },
+		{ name: "Waffle_(Fragola,Frutti di Bosco,Nutella,Pistacchio) ", category: "Dolci", price: 5.00 },
 		{ name: "Lotus Cake", category: "Dolci", price: 6.00 },
 		
 		<!-- CATEGORIA DRINKS -->
@@ -400,7 +408,7 @@ function downloadOrder() {
   const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
   const note = document.getElementById("note").value.trim() || "Nessuna nota";
 
-  let text = "=== COMANDA  "; text += `Tavolo: ${tableNumber}\n\n\n`;
+  let text = "=== COMANDA  "; text += `Tavolo: ${tableNumber} ===\n\n\n`;
   text += `Note: ${note}\n\n`;
 
   let total = 0;
@@ -431,6 +439,8 @@ function downloadOrder() {
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   link.download = `comanda_${tableNumber || "tavolo non specificato"}.txt`;
+
+    
   link.click();
 }
 
