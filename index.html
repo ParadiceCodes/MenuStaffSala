@@ -400,8 +400,7 @@ function downloadOrder() {
   const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
   const note = document.getElementById("note").value.trim() || "Nessuna nota";
 
-  let text = "=== COMANDA ===\n\n";
-  text += `Tavolo: ${tableNumber}\n`;
+  let text = "=== COMANDA  "; text += `Tavolo: ${tableNumber}\n\n\n`;
   text += `Note: ${note}\n\n`;
 
   let total = 0;
