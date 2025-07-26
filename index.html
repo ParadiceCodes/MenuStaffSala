@@ -430,7 +430,7 @@ function downloadOrder() {
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = 'comanda.txt';
+  link.download = `comanda_${tableNumber || "tavolo non specificato"}.txt`;
   link.click();
 }
 
