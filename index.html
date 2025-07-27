@@ -408,7 +408,7 @@ function downloadOrder() {
   const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
   const note = document.getElementById("note").value.trim() || "Nessuna nota";
 
-  let text = "=== COMANDA  "; text += `Tavolo: ${tableNumber} ===\n\n\n`;
+  let text = `=== COMANDA  Tavolo: ${tableNumber} ===\n\n\n`;
   text += `Note: ${note}\n\n`;
 
   let total = 0;
@@ -427,21 +427,18 @@ function downloadOrder() {
       items.forEach(item => {
         const subtotal = item.quantity * item.price;
         total += subtotal;
-        text += `${item.name} x${item.quantity} - ${subtotal.toFixed(2)}\n`;
+        text += `${item.name} x${item.quantity} - €${subtotal.toFixed(2)}\n`;
       });
       text += "\n";
     }
   });
-    text += "*************************** \n \n";
-  text += `TOTALE: ${total.toFixed(2)}\n`;
 
-  const blob = new Blob([text], { type: 'text/plain' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = `comanda_${tableNumber || "tavolo non specificato"}.txt`;
+  text += `TOTALE: €${total.toFixed(2)}\n`;
 
-    
-  link.click();
+  <!-- APRI IN UNA NUOVA SCHEDA -->
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(`<pre style="font-family: monospace; white-space: pre-wrap;">${text}</pre>`);
+  newWindow.document.title = `Comanda Tavolo ${tableNumber}`;
 }
 
 
