@@ -437,9 +437,11 @@ function downloadOrder() {
 
   <!-- APRI IN UNA NUOVA SCHEDA -->
   const newWindow = window.open('', '_blank');
-  newWindow.document.write(`<pre style="font-family: monospace; white-space: pre-wrap;">${text}</pre>`);
+ newWindow.document.write(`<pre style="font-family: monospace; white-space: pre-wrap; font-size: 30px; line-height: 1.4;">${text}</pre>`);
+
   newWindow.document.title = `Comanda Tavolo ${tableNumber}`;
 }
+
 
 
 
