@@ -181,7 +181,7 @@
       <tbody id="summaryList"></tbody>
     </table>  <!-- CHIUSURA TABLE PRINCIPALE --> <br>
 	<button onclick="clearOrder()">Svuota Ordine</button>
-	<button onclick="downloadOrder()">Scarica Comanda</button>
+	<button onclick="downloadOrder()">confermare la comanda?</button>
 
 	 <h3 id="totalPrice">Totale: 0.00</h3>
         <form align="center">
@@ -404,6 +404,9 @@ function downloadOrder() {
     alert("Nessun prodotto nell'ordine.");
     return;
   }
+  
+  const conferma = confirm("Sei sicuro di voler scaricare la comanda?"); <!-- DOMANDA DI CONFERMA PER SCARICARE -->
+  if (!conferma) return;
 
   const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
   const note = document.getElementById("note").value.trim() || "Nessuna nota";
@@ -437,9 +440,20 @@ function downloadOrder() {
 
   <!-- APRI IN UNA NUOVA SCHEDA -->
   const newWindow = window.open('', '_blank');
- newWindow.document.write(`<pre style="font-family: monospace; white-space: pre-wrap; font-size: 30px; line-height: 1.4;">${text}</pre>`);
+newWindow.document.write(`
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Comanda Tavolo ${tableNumber}</title>
+    </head>
+    <body style="margin:0; padding:20px; font-family:monospace; font-size:20px; line-height:1.5;">
+      <pre style="white-space: pre-wrap;">${text}</pre>
+    </body>
+  </html>
+`);
+;
 
-  newWindow.document.title = `Comanda Tavolo ${tableNumber}`;
+  newWindow.document.title = ` ${tableNumber}`;
 }
 
 
