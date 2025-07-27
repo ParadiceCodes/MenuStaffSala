@@ -405,7 +405,8 @@ function downloadOrder() {
     return;
   }
   
-
+  const conferma = confirm("Sei sicuro di voler scaricare la comanda?"); <!-- DOMANDA DI CONFERMA PER SCARICARE -->
+  if (!conferma) return;
 
   const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
   const note = document.getElementById("note").value.trim() || "Nessuna nota";
