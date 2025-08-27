@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CameriereSala</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>Menu Clienti Paradice Food & Drink Sala</title>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -27,11 +28,11 @@
       z-index: 1000;
     }
 
-    select, button {  <!-- tasto aggiungi rosa -->
-      margin: 1px 5px;
-      padding: 5px;
+    select, button {
+      margin: 10px 5px;
+      padding: 10px;
       font-size: 1rem;
-      border-radius: 2px;
+      border-radius: 8px;
       border: none;
       outline: none;
     }
@@ -51,22 +52,14 @@
       background-color: #ff33dd; <!-- colre rosa sfondo aggiungi -->
     }
 
-      #productList {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      justify-items: center;
-    }
-
     .product {
-      background: #2a0b3b; /* sfondo principale */
+      margin: 15px auto;
+      background: #2a0b3b;
       border-radius: 15px;
       padding: 15px;
+      max-width: 500px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      animation: fadeIn 0.5s ease-in-out;
-      text-align: center;
-      width: 100%;
-      max-width: 140px; /* più piccola per stare in 3 per riga */
+	  animation: fadeIn 0.5s ease-in-out;
     }
 	    @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
@@ -82,7 +75,7 @@
       margin-top: 40px;
     }
 
-    table {    <!--TABELLA RIEPILOGO -->
+    table {
       margin: 0 auto;
       width: 90%;
       border-collapse: collapse;
@@ -101,6 +94,7 @@
       background-color: #3a104d;
       color: #ff33dd;  <!-- colore scritte tabella -->
     }
+	
 
     td button.remove {
       color: red;
@@ -130,19 +124,71 @@
       opacity: 0.1;
       z-index: -1;
     }
+	
+  .mini {
+    font-size: 32px;
+  }
+  	.logo-container {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+}
+	.grid-links {
+      display: grid;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 400px;
+      padding: 10px;
+    }
+    .grid-links a {
+      background: #1a002d;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    .grid-links a:hover {
+      background: #320057;
+    }
+
   </style>
 </head>
 <body>
-  <h1>StaffSala</h1>
+  <header>
+   <div class="logo-container">
+    <img 
+      src="https://i.imgur.com/Q019u6t.png"
+      alt="Logo Parad Ice" 
+      class="logo"
+    />
+  </div>
+  </header>
+   <!-- <h1>🍔🍸  MENU'<span style="color:#FC52AE;">PARAD</span><span style="color:#04C1D6;"> ICE</span> </h1> -->
 
 
-  <div> 
-            <!-- FINESTRA PER INSERIRE IL TAVOLO -->
-		   <input type="text" id="table-number" placeholder="Inserisci Tavolo">  <br> <br>
-           
 
-
-    <select id="categorySelect" onchange="showProducts()">
+  <div>
+  <table border="3" cellspacing="40" cellpadding="" align="center" width="50">
+	  <td  bgcolor="#000000">
+	    <p>
+		  <font color="#00BFFF" face="Copperplate Gothic Bold" >
+		  <marquee behavior="scroll" direction="left">
+		  🔧⚠️ Stiamo aggiornando il sito per offrirti un'esperienza migliore – grazie per la tua pazienza!!! 
+		   </marquee>
+		  </font>
+		  </p>
+  <h2>Come funziona?</h2> 
+      1. Scegli le categorie che ti ispirano<br>
+      2. Aggiungi i tuoi piatti preferiti<br>
+      3. Chiama il cameriere per ordinare!<br>
+	
+      <select id="categorySelect" onchange="showProducts()">
       <option value="">-- Seleziona --</option>
 	  
 	  <!-- CATEGORIE -->
@@ -168,31 +214,59 @@
 
   <div id="orderSummary">
     
-
+    <h2>il tuo ordine comprende <br>👇 </h2>  
     
     <table>
       <thead>
         <tr>
           <th>Prodotto</th>
           <th>Quantita'</th>
-          <th>Prezzo</th> 
           <th>Totale</th>
           <th>Azioni</th>
         </tr>
       </thead>
       <tbody id="summaryList"></tbody>
-    </table>  <!-- CHIUSURA TABLE PRINCIPALE --> <br>
+    </table>  <!-- CHIUSURA TABLE PRINCIPALE -->
+	<h3 id="totalPrice">Totale: 0.00</h3>
 	<button onclick="clearOrder()">Svuota Ordine</button>
-	<button onclick="downloadOrder()">confermare la comanda?</button>
-
-	 <h3 id="totalPrice">Totale: 0.00</h3>
-        <form align="center">
-		  <textarea rows= "14" cols="50 "id="note" placeholder="Note"></textarea>
-		</form> 
-    </p>
 	
 
+	<!-- TESTO CHE SCORRE -->
+		  <p>
+		  <font color="#00BFFF" face="Copperplate Gothic Bold" >
+		  <marquee behavior="scroll" direction="left">
+		  ❄️ = Prodotto o Presenza di ingredienti surgelati o congelati all’origine
+		   </marquee>
+		  </font>
+		  </p>
+
   </div>
+
+<tr> 
+       <td align="center" bgcolor="#000000">
+	   <div class="grid-links">
+      
+       <a href="https://drive.google.com/uc?export=download&id=1evnEwlJD8_pli1PLFt9Pb9FNi4tVOAcO"target="_blank" style="color:#ffffff; text-decoration:none;">
+       <h2>📥 Menu PDF</h2>
+	   
+	     
+       <a href="https://www.instagram.com/paradicefood_drink?igsh=ZTB1eTZnM3k0eGQx"target="_blank" style="color: #962FBF; text-decoration:none;">
+       <h2>     <i class="fa fa-instagram"> </i> Instagram </h2>
+       </a>
+	   <!-- https://www.google.com/search?sca_esv=76304cc329e4311f&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EwHbmdbewqoIu8_wOEYYTdGlxqQ5zCRxcSkWMVJzwXK-QhsTQW7Wra1zvvz2oUDUu22cG4LWHkB3vqjFIOyGK0gYyQxQbwkJX5n9cTNlldBV6dIULA%3D%3D&q=Paradice+food+%26+drink+Reviews&sa=X&ved=2ahUKEwiP6aX5lPeOAxWl87sIHd7NCboQ0bkNegQINBAD&biw=1366&bih=657&dpr=1 -->
+      
+       <a href="https://www.google.com/search?sca_esv=76304cc329e4311f&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EwHbmdbewqoIu8_wOEYYTdGlxqQ5zCRxcSkWMVJzwXK-QhsTQW7Wra1zvvz2oUDUu22cG4LWHkB3vqjFIOyGK0gYyQxQbwkJX5n9cTNlldBV6dIULA%3D%3D&q=Paradice+food+%26+drink+Reviews&sa=X&ved=2ahUKEwiP6aX5lPeOAxWl87sIHd7NCboQ0bkNegQINBAD&biw=1366&bih=657&dpr=1"target="_blank" style="color: #FFFFFF; text-decoration:none;">
+       <h2> </i>✍️ lascia una recensione</h2>
+       </a>
+       
+	  
+       <a href="https://drive.google.com/file/d/1yXR9dV9DExwdRrsFLpeyhaKWDMbzp3bR/view?usp=sharing"target="_blank" style="color:#ffffff; text-decoration:none;">
+       <h2>📚  Consulta il Libro Allergeni</h2>
+       </a>
+	   </div>
+     </td>
+	 </table>
+</tr>
 
 
 
@@ -200,75 +274,77 @@
     const menuData = {
       categories: ["Snack", "Fritti", "Insalate", "Burgers", "Piatti Messicani","Bevande", "Drinks", "Spritz", "Caffetteria", "Dolci", "Birre", "Artigianali"],
       products: [
-	  { name: "Arachidi", category: "Snack", price: 2.00 },
-        { name: "Nachos", category: "Snack", price: 4.00 },
-		{ name: "Nachos Con Cheddar", category: "Snack", price: 6.00 },
-		{ name: "Olive", category: "Snack", price: 3.00 },
-		{ name: "Pistacchi", category: "Snack", price: 3.00 },
-		{ name: "Chips", category: "Snack", price: 2.00 },
+	   
+	  
+        { name: "Arachidi", category: "Snack", price: 2.00, description: "(Croccanti e Saporiti)" },
+        { name: "Nachos", category: "Snack", price: 4.00, description: "(Leggeri e Irresistibili)" },
+		{ name: "Nachos Con Cheddar", category: "Snack", price: 6.00, description: "(Con Formaggio Cheddar Fuso e Jalapeno Piccanti)" },
+		{ name: "Olive", category: "Snack", price: 3.00, description: "(Un Classico Da Aperitivo)" },
+		{ name: "Pistacchi", category: "Snack", price: 3.00, description: "(Tostati e Salati)" },
+		{ name: "Chips", category: "Snack", price: 2.00, description: "(Sottili, Dorate e Croccanti)" },
 		
 		
 		
 		
-        { name: "Alette di Pollo -5pz", category: "Fritti", price: 6.00 },
-		{ name: "Cheddar Sticks -5pz", category: "Fritti", price: 5.00 },
-		{ name: "Chili Cheese Nuggets -7pz", category: "Fritti", price: 5.00 },
-		{ name: "Mozzarella Sticks -5pz", category: "Fritti", price: 5.00 },
-		{ name: "Polpettine di Melanzana -6pz", category: "Fritti", price: 5.00 },
-		{ name: "Nuggets di Pollo -5pz", category: "Fritti", price: 5.00 },
-		{ name: "Onion Rings -6pz", category: "Fritti", price: 5.00 },
-		{ name: "Patatine Fritte", category: "Fritti", price: 4.00 },
-		{ name: "Mushroom Bites -5pz", category: "Fritti", price: 5.00 },
-		{ name: "Triangolini Vegani -6pz", category: "Fritti", price: 6.00 },
+        { name: "Alette di Pollo*", category: "Fritti", price: 6.00, description: "(Succulente alette speziate 5 pz)" },
+		{ name: "Cheddar Sticks*", category: "Fritti", price: 5.00, description: "(Bastoncini dal Cuore Filante di Cheddar 5 pz)" },
+		{ name: "Chili Cheese Nuggets*", category: "Fritti", price: 5.00, description: "(Nuggets Piccanti con Formaggio 7 pz)" },
+		{ name: "Mozzarella Sticks*", category: "Fritti", price: 5.00, description: "(Bastoncini di Mozzarella Filante 5 pz)" },
+		{ name: "Polpettine di Melanzana*", category: "Fritti", price: 5.00, description: "(Polpette di Melanzana Morbide e Saporite 6 pz)" },
+		{ name: "Nuggets di Pollo*", category: "Fritti", price: 5.00, description: "(Bocconcini di Pollo avvolti in una Panatura Speciale 5 pz)" },
+		{ name: "Onion Rings*", category: "Fritti", price: 5.00, description: "(Anelli di Cipolla con Pastella Croccante 6 pz)" },
+		{ name: "Patatine Fritte*", category: "Fritti", price: 4.00, description: "(Le Classiche)" },
+		{ name: "Mushroom Bites*", category: "Fritti", price: 5.00, description: "(Crocchette Ripiene di Funghi 5 pz)" },
+		{ name: "Triangolini Vegani*", category: "Fritti", price: 6.00, description: "(Croccanti con Ripieno 100% Vegetale 6 pz)" },
 		
 			
-        { name: "Bacon Burger", category: "Burgers", price: 11.00 },
-		{ name: "Bosco Burger", category: "Burgers", price: 14.00 },
-		{ name: "Cheese Burger", category: "Burgers", price: 10.00 },
-		{ name: "Crispy Chicken Burger", category: "Burgers", price: 10.00 },
-		{ name: "Pulled Pork", category: "Burgers", price: 13.00 },
-		{ name: "Smash Burger", category: "Burgers", price: 13.00 },
-		{ name: "Vulcano Burger", category: "Burgers", price: 13.00, customColor: "red" },
-		{ name: "Double Trouble Burger", category: "Burgers", price: 18.00 },
-		{ name: "Paradice Chicken Burger", category: "Burgers", price: 12.00 },
-		{ name: "Green Burger <br>", category: "Burgers", price: 12.00, customColor: "#00FF00"  },
+        
+		{ name: "Bacon Burger*", description: "(Burger di Manzo, Cheddar, Bacon Salsa Burger, Iceberg, Pomodoro)", category: "Burgers", price: 11.00 },
+		{ name: "Bosco Burger*", description: "(Burger di Manzo, Provola, Lardo, Salsa Senape, Funghi Porcini)", category: "Burgers", price: 14.00 },
+		{ name: "Cheese Burger*", description: "(Burger di Manzo, Cheddar,Salsa Ketchup, Maionese,Iceberg, Pomodoro, Cetriolini)", category: "Burgers", price: 10.00 },
+		{ name: "Crispy Chicken Burger*", description: "(Cotoletta di Pollo, Salsa Maionese, Iceberg, Pomodoro)", category: "Burgers", price: 10.00 },
+		{ name: "Pulled Pork", description: "(Maiale Sfilacciato, Salsa BBQ, Iceberg, Pomodoro, Cipolla Caramellata)", category: "Burgers", price: 13.00 },
+		{ name: "Smash Burger*", description: "(Pan Patata, Burger di Manzo, Bacon, Cipolla Fresca, Cheddar con Salsa BBQ)", category: "Burgers", price: 13.00 },
+		{ name: "Vulcano Burger*", description: "(Burger di Manzo, Cheddar, Bacon, Salsa Piccante Iceberg, Cipolla fresca)", category: "Burgers", price: 13.00, customColor: "red" },
+		{ name: "Double Trouble Burger*", description: "(Doppio Burger di manzo, Cheddar, Bacon, Salsa Ketchup & Maionese, Iceberg, Pomodoro)", category: "Burgers", price: 18.00 },
+		{ name: "Paradice Chicken Burger*", description: "(Cotoletta di Pollo, Cheddar, Bacon, Salsa Senape al Miele, Insalata, Pomodoro)", category: "Burgers", price: 12.00 },
+		{ name: "Green Burger*", description: "(Bun Vegano, Burger Vegano, Insalata e Pomodoro)", category: "Burgers", price: 12.00, customColor: "#00FF00"  },
 		
 		
 		
-        { name: "Caesar Salad", category: "Insalate", price: 8.50 },
-		{ name: "Mex Salad", category: "Insalate", price: 9.00 },
-		{ name: "Paradice Salad", category: "Insalate", price: 9.00 },
-		{ name: "Veggie Salad", category: "Insalate", price: 8.50, customColor: "#00FF00" },
+        { name: "Caesar Salad*", description: "(Iceberg, Pollo,Crostini, Scaglie Parmigiano, Salsa Caesar)", category: "Insalate", price: 8.50 },
+		{ name: "Mex Salad*", description: "(Iceberg, Pomodoro, Pollo speziato, Fagioli Rossi, Jalapeño, Mayo Spicy)", category: "Insalate", price: 9.00 },
+		{ name: "Paradice Salad", description: "(Iceberg, Pomodorini, Mais, Tonno e Cipolla)", category: "Insalate", price: 9.00 },
+		{ name: "Veggie Salad", description: "(Iceberg, Pomodoro, Mozzarella,Verdure, Hummus di ceci)", category: "Insalate", price: 8.50, customColor: "#00FF00" },
+		{ name: "Insalata Greca", description: "(Iceberg, pomodorini, olive, cipolla fresca, formaggio feta)", category: "Insalate", price: 9.00 },
 		
 		
 		
 		
-		
-        { name: "Tacos Triplete", category: "Piatti Messicani", price: 9.00 },
-		{ name: "Quesadilla Loca", category: "Piatti Messicani", price: 12.00 },
-		{ name: "Burrito Supremo", category: "Piatti Messicani", price: 8.00 },
-		{ name: "Chili Combo", price: 8.00 },
+        { name: "Tacos Triplete", description: "(Tre Tacos:-Chili di Carne e insalata-Pollo Speziato,insalata, yogurtlime e jalapeno-Verdure grigliate,insalata,guacamole e cheddar)", category: "Piatti Messicani", price: 9.00 },
+		{ name: "Quesadilla Loca", description: "(Due Tortilla Con:-Cheddar Fuso, jalapeños-Cheddar Fuso, Verdure emaiale sfilacciato)", category: "Piatti Messicani", price: 12.00 },
+		{ name: "Burrito Supremo", description: "(Con Chili di Carne, Insalata,Pomodoro, cheddar e yogurt)", category: "Piatti Messicani", price: 8.00 },
+		{ name: "Chili Combo", description: "(Chili Con Carne e cubetti di pomodoro fresco accompagnate da tortillas calde)", category: "Piatti Messicani", price: 8.00 },
 		
 		
 		
        
 		
-		{ name: "Pancakes <br> •topping?", category: "Dolci", price: 5.00 },
-		{ name: "Coppa Gelato <br> •Crema o Cioccolato?", category: "Dolci", price: 4.00 },
-		{ name: "Sweet Paradice", category: "Dolci", price: 6.00 },
-		{ name: "Waffle <br> •topping?", category: "Dolci", price: 5.00 },
-		{ name: "Lotus Cake", category: "Dolci", price: 6.00 },
+		/*{ name: "Pancakes", description: "(Sciroppo D'acero o Fragole)", category: "Dolci", price: 6.00 },*/
+		{ name: "Coppa Gelato*", description: "(Crema o Cioccolato)", category: "Dolci", price: 4.00 },
+		{ name: "Sweet Paradice*", description: "(Un Brownie Speciale)", category: "Dolci", price: 6.00 },
+		{ name: "Waffle*", description: "(Fragola,Frutti di Bosco,Nutella,Pistacchio)", category: "Dolci", price: 5.00 },
+		{ name: "Lotus Cake*", description: "(Cheesecake dal gusto unico con crema Lotus)", category: "Dolci", price: 6.00 },
 		
 		
-		{ name: "Acqua Piccola naturale", category: "Bevande", price: 1.50 },
-		{ name: "Acqua Piccola frizzante", category: "Bevande", price: 1.50 },
-		{ name: "Coca Cola Vetro <br> Normale", category: "Bevande", price: 2.50 },
-		{ name: "Coca Cola Vetro <br> Zero", category: "Bevande", price: 2.50 },
+		{ name: "Acqua Piccola", description: "(Naturale o Frizzante)", category: "Bevande", price: 1.50 },
+		{ name: "Coca Cola Vetro", description: "(Normale o Zero)", category: "Bevande", price: 2.50 },
 		{ name: "Fanta Vetro", category: "Bevande", price: 2.50 },
 		{ name: "Sprite Vetro", category: "Bevande", price: 2.50 },
-		{ name: "Thé <br> •Limone o Pesca ", category: "Bevande", price: 2.50 },
-		{ name: "Acqua Grande", category: "Bevande", price: 3.00 },
-		{ name: "Coca Cola Grande <br> •Normale o Zero", category: "Bevande", price: 3.50 },
+		{ name: "Thé", description: "(Limone o Pesca)", category: "Bevande", price: 2.50 },
+		{ name: "Acqua Grande", description: "(Naturale o Frizzante)", category: "Bevande", price: 3.00 },
+		{ name: "Coca Cola Grande", description: "(Normale o Zero)", category: "Bevande", price: 3.50 },
+		{ name: "Succhi di Frutta", description: "(Ace,Pesca,Pera,Ananas)", category: "Bevande", price: 2.50 },
 		{ name: "Fanta Grande", category: "Bevande", price: 3.50 },
 	
 		
@@ -295,14 +371,14 @@
 		{ name: "Passion Spritz", category: "Spritz", price: 5.00 },
 		
 		
-		{ name: "Messina Cristalli di Sale", category: "Birre", price: 4.00 },
-		{ name: "Ichnusa “non filtrata”", category: "Birre", price: 3.00 },
-		{ name: "Menabrea", category: "Birre", price: 4.00 },
+		{ name: "Messina Cristalli di Sale",description: "(33cl ,Lager chiara 4,7% )", category: "Birre", price: 4.00 },
+		{ name: "Ichnusa “non filtrata”",description: "(33cl ,Bionda 5,0%)", category: "Birre", price: 3.00 },
+		{ name: "Menabrea",description: "(33cl ,Bionda 4,8% )", category: "Birre", price: 4.00 },
 		
 		
-		{ name: "Hausbier 33cl <br> Lager 5,0%", category: "Artigianali", price: 5.00 },
-		{ name: "Choose a fucking big television 33cl<br> Double I.P.A 8,0%", category: "Artigianali", price: 5.00 },
-		{ name: "Zaubeziege 33cl <br> Bock 6,5%", category: "Artigianali", price: 5.00 },
+		{ name: "Hausbier", description: "(33cl ,Lager 5,0%)", category: "Artigianali", price: 5.00 },
+		{ name: "Choose a fucking big television", description: "(33cl ,Double I.P.A 8,0%)", category: "Artigianali", price: 5.00 },
+		{ name: "Zaubeziege", description: "(33cl ,Bock 6,5%)", category: "Artigianali", price: 5.00 },
 			
         { name: "Espresso", category: "Caffetteria", price: 1.20 },
 		{ name: "Cappuccino", category: "Caffetteria", price: 1.60 },
@@ -330,8 +406,12 @@
         const div = document.createElement('div');
         div.className = 'product';
         div.innerHTML = `
-          <!-- <strong>${prod.name}</strong><br>${prod.price.toFixed(2)}<br> -->
-          <strong style="color: ${prod.customColor};">${prod.name}</strong><br>${prod.price.toFixed(2)}<br>
+          
+           <strong style="color: ${prod.customColor || '#00f0ff'};">${prod.name}</strong><br>
+          <span style="color: white; font-size: 0.85rem;">${prod.description || ''}</span><br>
+          <span>${prod.price.toFixed(2)} €</span><br>
+		  
+		  
 
           <button onclick="addToOrder('${prod.name}')">Aggiungi</button>
         `;
@@ -368,7 +448,7 @@ function clearOrder() {
   tbody.innerHTML = '';
   let total = 0;
 
-  <!-- Raggruppa per categoria -->
+  // Raggruppa per categoria
   const grouped = {};
   order.forEach(item => {
     if (!grouped[item.category]) {
@@ -377,13 +457,11 @@ function clearOrder() {
     grouped[item.category].push(item);
   });
 
-  //
-
-<!--  Ordina categorie in base a menuData.categories -->
+  // Ordina categorie in base a menuData.categories
   menuData.categories.forEach(category => {
     const items = grouped[category];
     if (items) {
-      <!-- Intestazione categoria -->
+      // Intestazione categoria
       const catRow = document.createElement('tr');
       catRow.innerHTML = `<td colspan="1" style="font-weight:bold; background-color:#3a104d; color:#ffe600;">${category}</td>`;
       tbody.appendChild(catRow);
@@ -396,7 +474,6 @@ function clearOrder() {
         tr.innerHTML = `
           <td>${item.name}</td>
           <td>${item.quantity}</td>
-          <td>${item.price.toFixed(2)}</td>
           <td>${subtotal.toFixed(2)}</td>
           <td><button class="remove" onclick="removeFromOrder(${order.indexOf(item)})">rimuovi</button></td>
         `;
@@ -411,68 +488,10 @@ function clearOrder() {
 
     showProducts();
     updateSummary();
-	
-	<!-- PER SCARICARE LA COMANDA -->
-function downloadOrder() {
-  if (order.length === 0) {
-    alert("Nessun prodotto nell'ordine.");
-    return;
-  }
-  
-  const conferma = confirm("Sei sicuro di voler scaricare la comanda?"); <!-- DOMANDA DI CONFERMA PER SCARICARE -->
-  if (!conferma) return;
-
-  const tableNumber = document.getElementById("table-number").value.trim() || "Non specificato";
-  const note = document.getElementById("note").value.trim() || "Nessuna nota";
-
-  let text = `=== COMANDA  Tavolo: ${tableNumber} ===\n\n\n`;
-  text += `Note: ${note}\n\n`;
-
-  let total = 0;
-  const grouped = {};
-  order.forEach(item => {
-    if (!grouped[item.category]) {
-      grouped[item.category] = [];
-    }
-    grouped[item.category].push(item);
-  });
-
-  menuData.categories.forEach(category => {
-    const items = grouped[category];
-    if (items) {
-      text += `-- ${category} --\n`;
-      items.forEach(item => {
-        const subtotal = item.quantity * item.price;
-        total += subtotal;
-        text += `${item.name} x${item.quantity} - €${subtotal.toFixed(2)}\n`;
-      });
-      text += "\n";
-    }
-  });
-
-  text += `TOTALE: €${total.toFixed(2)}\n`;
-
-  <!-- APRI IN UNA NUOVA SCHEDA -->
-  const newWindow = window.open('', '_blank');
-newWindow.document.write(`
-  <html>
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Comanda Tavolo ${tableNumber}</title>
-    </head>
-    <body style="margin:0; padding:20px; font-family:monospace; font-size:20px; line-height:1.5;">
-      <pre style="white-space: pre-wrap;">${text}</pre>
-    </body>
-  </html>
-`);
-;
-
-  newWindow.document.title = ` ${tableNumber}`;
-}
-
-
-
-
   </script>
+   <footer>
+    <p>© 2024 Paradice Food & Drink.</p>
+    <!-- <p><a href="/privacy.html" style="color: #aaa;">privacy </a></p> -->
+  </footer>
 </body>
 </html>
